@@ -72,6 +72,13 @@ class ApplicationSettings:
     def get_signup_data_table_name(cls):
         return "signup"
 
+    def get_test_data_file_path(self):
+        """
+        returns current test data file path
+        :return:
+        """
+        return self.test_data_file_path
+
     def get_test_data_file(self):
         """
         returns current test data file path
