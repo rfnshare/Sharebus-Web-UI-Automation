@@ -2,6 +2,7 @@
 Author: Abdullah Al Faroque, Date: March 27, 2023
 """
 import datetime
+from pathlib import Path
 
 from Resources.ExcelUtils import *
 
@@ -14,10 +15,10 @@ class ApplicationSettings:
     browser_name = "chrome"
     image_folder_path = None
     start_time = datetime.datetime.now()
-
+    excel_path = Path(__file__).resolve().parent.parent / 'Test/TestData/test_data.xlsx'
     # Environment details
     url = ''
-    test_data_file_path = "./Test/TestData/test_data.xlsx"
+    test_data_file_path = excel_path
 
     def setUp(self, os="win"):
 
