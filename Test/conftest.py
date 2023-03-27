@@ -13,6 +13,7 @@ def setup(request):
     browser.launch_browser()
     browser.maximize_browser()
     browser.go_to_url()
+    driver = browser.get_web_driver()
     request.cls.driver = browser.get_web_driver()
     yield
     browser.close_browser()
