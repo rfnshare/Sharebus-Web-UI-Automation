@@ -22,6 +22,10 @@ def read_time():
     return str(datetime.today().strftime('%I-%M-%S-%p'))
 
 
+def take_standard_screenshot(driver, file_name):
+    driver.save_screenshot(file_name, False)
+
+
 def get_html_reports(report_type):
     reports = []
     if not report_type == "both":
