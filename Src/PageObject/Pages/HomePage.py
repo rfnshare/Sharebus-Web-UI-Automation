@@ -9,6 +9,6 @@ class HomePage(BasePage):
         self.driver = driver
         self.locator = HomePageLocators
 
-    def test(self):
-        pass
+    def get_navbar(self):
+        return self.find_element(*self.locator.NAVBAR)
 
