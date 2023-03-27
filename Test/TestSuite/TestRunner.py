@@ -5,7 +5,7 @@ from pathlib import Path
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 from Resources.ExcelUtils import read_configuration_data_from_excel
 from Resources.GeneralUtils import read_date, read_time, get_html_reports
-from Resources.MailUtils import send_report
+
 excel_path = Path(__file__).resolve().parent.parent / 'TestData/test_data.xlsx'
 configuration_data = read_configuration_data_from_excel(excel_path)
 
