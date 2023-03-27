@@ -1,18 +1,19 @@
 import subprocess
 import sys
 import os
-
+from pathlib import Path
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 from Resources.ExcelUtils import read_configuration_data_from_excel
 from Resources.GeneralUtils import read_date, read_time, get_html_reports
 from Resources.MailUtils import send_report
-
-configuration_data = read_configuration_data_from_excel("./Test/TestData/test_data.xlsx")
+excel_path = Path(__file__).resolve().parent.parent / 'TestData/test_data.xlsx'
+configuration_data = read_configuration_data_from_excel(excel_path)
 
 report_file_name_prefix = f"{read_date()}_{read_time()}"
 test_type = "regression"
-run_command = f"pytest --html=./Reports/HTMLReports/{test_type}_{report_file_name_prefix}_report.html -v " \
-              f"--junitxml=./Reports/XMLReports/{test_type}_{report_file_name_prefix}_report.xml" \
+run_command = f"cd ../.. && python -m pytest --html=./Reports/HTMLReports/{test_type}_{report_file_name_prefix}_report.html " \
+              f"--self-contained-html " \
+              f"-v --junitxml=./Reports/XMLReports/{test_type}_{report_file_name_prefix}_report.xml" \
               f"-s --alluredir=./Reports/AllureReports/{test_type}_report_allure/{report_file_name_prefix}"
 
 subprocess.run(run_command, shell=True)
@@ -26,6 +27,6 @@ report_receiver_email = configuration_data["report_receiver"]
 # send_report(report_receiver_email, html_reports, project_name)
 
 # allure report serve
-allure_serve_command = f"allure serve ./Reports/AllureReports/{test_type}_report_allure/{report_file_name_prefix}"
+allure_serve_command = f"cd ../.. && allure serve ./Reports/AllureReports/{test_type}_report_allure/{report_file_name_prefix}"
 
 subprocess.run(allure_serve_command, shell=True)
