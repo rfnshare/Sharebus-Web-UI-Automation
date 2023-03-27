@@ -78,7 +78,7 @@ This will create an HTML, allure report. You can find report in Reports director
 
 ![Allure report screenshot](https://raw.githubusercontent.com/startrug/phptravels-selenium-py/screenshots/allure_report.png "Allure report screenshot")
 
-Report is generated in a chorsn browser.
+Report is generated in a chosen browser.
 ### Usage
 
 
