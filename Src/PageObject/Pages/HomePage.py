@@ -19,3 +19,6 @@ class HomePage(BasePage):
                 self.find_element(*self.locator.NAVBAR)
             ]
         return all(tests)
+
+    def get_text(self):
+        return self.find_element(*self.locator.NAVBAR).text

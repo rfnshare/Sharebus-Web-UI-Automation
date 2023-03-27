@@ -13,4 +13,6 @@ class TestHomePage(WebDriverSetup):
         url = home_page.get_url()
         print("Starting to check are all homepage elements visible properly")
         assert home_page.check_home_page_elements() is True, "Home page elements are not visible properly"
-        log.info(f"URL {url} is loaded")
+        log.info(f"URL {url} is loaded with {home_page.get_text()}")
+        assert "failed" in home_page.get_text()
+        log.critical("Title Not Matching")
