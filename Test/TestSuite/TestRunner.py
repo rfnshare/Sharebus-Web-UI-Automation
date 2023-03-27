@@ -1,3 +1,4 @@
+import glob
 import subprocess
 import sys
 import os
@@ -11,7 +12,7 @@ configuration_data = read_configuration_data_from_excel(excel_path)
 
 report_file_name_prefix = f"{read_date()}_{read_time()}"
 test_type = configuration_data['test_type']
-run_command = f"cd ../.. && python -m pytest -m {test_type} --html=./Reports/HTMLReports/{test_type}_{report_file_name_prefix}_report.html " \
+run_command = f"cd ../.. && python -m pytest -m {test_type} --html=./Reports/HTMLReports/{test_type}_report_html/{test_type}_{report_file_name_prefix}_report.html " \
               f"--self-contained-html " \
               f"-v --junitxml=./Reports/XMLReports/{test_type}_{report_file_name_prefix}_report.xml" \
               f"-s --alluredir=./Reports/AllureReports/{test_type}_report_allure/{report_file_name_prefix}"
@@ -19,14 +20,23 @@ run_command = f"cd ../.. && python -m pytest -m {test_type} --html=./Reports/HTM
 subprocess.run(run_command, shell=True)
 
 # send report if generated
-html_reports = get_html_reports(test_type)
+# html_reports = get_html_reports(test_type)
 
 # send report to receivers email
 project_name = configuration_data["project_name"]
 report_receiver_email = configuration_data["report_receiver"]
 # send_report(report_receiver_email, html_reports, project_name)
 
+# get html report name
+report = os.path.abspath(glob.glob(f"../../Reports/HTMLReports/{test_type}_report_html/{test_type}_*.html")[-1])
+print(report)
+
+# html report open
+html_open_report = f"start {report}"
+subprocess.run(html_open_report, shell=True)
+
 # allure report serve
 allure_serve_command = f"cd ../.. && allure serve ./Reports/AllureReports/{test_type}_report_allure/{report_file_name_prefix}"
-
 subprocess.run(allure_serve_command, shell=True)
+
+
