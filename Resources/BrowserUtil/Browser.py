@@ -7,7 +7,7 @@ from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from webdriver_manager.opera import OperaDriverManager
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
-from Resources.ApplicationSettings import ApplicationSettings
+from Config.ApplicationSettings import ApplicationSettings
 from Resources.ExcelUtils import read_configuration_data_from_excel
 
 
