@@ -30,7 +30,7 @@ def get_html_reports(report_type):
     reports = []
     if not report_type == "both":
         try:
-            report = os.path.abspath(glob.glob(f"./Reports/HTMLReports/{report_type}_*.html")[-1])
+            report = os.path.abspath(glob.glob(f"../Reports/HTMLReports/{report_type}_*.html")[-1])
             reports.append(report)
         except Exception as e:
             print("Report not ready, Error", e)
