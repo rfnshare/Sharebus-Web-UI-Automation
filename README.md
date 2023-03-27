@@ -57,24 +57,28 @@ This is an selenium based framework that interacts with Ferdia Sharebus Web App 
 5. For Smoke set, Run this script.
     ```
     python -m pytest -m smoke
-
     ```
    This will open a web app in the chosen browser & run smoke set.
 
-6. For Full Run this script.
+6. For Full Run this script from cmd line.
     ```
     python -m pytest -v -s
-
     ```
-   This will open a app in the android device & login into Daraz.
+   This will open an app in the android device & login into Daraz.
 
-7. Generate HTML reports, Allure Reports, Junit Reports, Screenshots when fails with run script include log.
-    ```
-    Test/TestSuite/TestRunner.py
+## Run Automated Tests
 
-    ```
-   This will create an HTML, allure report. You can find report in Reports directory, report automatically will open in browser.
+To run all test cases without cmd line, Go to below directory, run `TestRunner.py` file by right click from pycharm
+```
+Test > TestSuite > TestRunner.py
+```
+This will create an HTML, allure report. You can find report in Reports directory, report automatically will open in browser.
 
+## Sample Test Report
+
+![Allure report screenshot](https://raw.githubusercontent.com/startrug/phptravels-selenium-py/screenshots/allure_report.png "Allure report screenshot")
+
+Report is generated in a chorsn browser.
 ### Usage
 
 
