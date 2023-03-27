@@ -7,9 +7,10 @@ from Src.TestBase.WebDriverSetup import WebDriverSetup
 @allure.title("Home Page Test")
 @allure.description("Checking homepage elements appears properly")
 class TestHomePage(WebDriverSetup):
-    def test_checking_home_is_loaded(self):
+    def test_01_home_page_elements_visibility(self):
         log = self.get_logger()
         home_page = HomePage(self.driver)
         url = home_page.get_url()
-        home_page.get_navbar()
+        print("Starting to check are all homepage elements visible properly")
+        assert home_page.check_home_page_elements() is True, "Home page elements are not visible properly"
         log.info(f"URL {url} is loaded")

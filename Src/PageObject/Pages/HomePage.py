@@ -9,6 +9,13 @@ class HomePage(BasePage):
         self.driver = driver
         self.locator = HomePageLocators
 
-    def get_navbar(self):
-        return self.find_element(*self.locator.NAVBAR)
-
+    def check_home_page_elements(self):
+        """
+            This method checks if all the elements on the home page are visible
+            :return:
+        """
+        tests = \
+            [
+                self.find_element(*self.locator.NAVBAR)
+            ]
+        return all(tests)
