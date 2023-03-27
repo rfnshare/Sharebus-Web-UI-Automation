@@ -23,4 +23,4 @@ class TestHomePage(WebDriverSetup):
         home_page = HomePage(self.driver)
         log.info(f"URL is loaded with {home_page.get_text()}")
         log.error("Title Not Matching")
-        assert "failed" in home_page.get_text()
+        assert "Example" in home_page.get_text()
