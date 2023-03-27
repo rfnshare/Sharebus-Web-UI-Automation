@@ -7,9 +7,7 @@
 
 <br />
 <p align="center">
-  <a href="https://github.com/rfnshare/workspace-laznormal">
     <img src="Resources/sharebus.png" alt="Logo" height="100">
-  </a>
 
   <h3 align="center">Sharebus Web UI Automation</h3>
 
