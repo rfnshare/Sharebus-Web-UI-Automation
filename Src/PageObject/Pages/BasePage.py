@@ -8,7 +8,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
-class BasePage():
+class BasePage(object):
     def __init__(self, driver, base_url="about:blank"):
         self.base_url = base_url
         self.driver = driver
