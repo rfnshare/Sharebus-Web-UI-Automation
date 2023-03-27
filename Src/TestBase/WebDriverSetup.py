@@ -9,10 +9,15 @@ import logging.config
 @pytest.mark.usefixtures("setup")
 class WebDriverSetup:
     def get_logger(self):
-        LOGGING_CONFIG = Path(__file__).parent.parent.parent / 'Config/logging.conf'
-        logging.config.fileConfig(LOGGING_CONFIG)
+        file = logging.FileHandler(Path(__file__).parent.parent.parent/"Reports/Logs/logfile.log")  # File for log
+        logging.basicConfig(datefmt='%Y-%m-%d %I:%M:%S %p')
+        formatter = logging.Formatter("%(levelname)s :%(name)s :%(message)s :%(asctime)s")  # Format of log
+        file.setFormatter(formatter)  # set formatter into file
+
         logger_name = inspect.stack()[1][3]
         logger = logging.getLogger(logger_name)
+        logger.addHandler(file)  # adding log into file
+        logger.setLevel(logging.INFO)
         return logger
 
     def take_ss(self, name):
