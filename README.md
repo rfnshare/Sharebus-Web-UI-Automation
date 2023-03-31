@@ -66,11 +66,20 @@ This is an selenium based framework that interacts with Ferdia Sharebus Web App 
 
 ## Run Automated Tests
 
-To run all test cases without cmd line, Go to below directory, run `TestRunner.py` file by right click from pycharm
+* To run all test cases with cmd line with html & allure report, run
+```
+python -m pytest -m <smoke/regression> --html=Reports/HTMLReports/index.html --self-contained-html -s --alluredir=./Reports/AllureReports/<smoke/regression>_report_allure
+```
+* Generate Allure HTML Report
+```
+allure serve ./Reports/AllureReports/<smoke/regression>_report_allure
+```
+* To run all test cases without cmd line, Go to below directory, run `TestRunner.py` file by right click from pycharm
 ```
 Test > TestSuite > TestRunner.py
 ```
 This will create an HTML, allure report. You can find report in Reports directory, report automatically will open in browser.
+* You can configure Jenkins to parameterized run your test cases & generate html report, allure report, junit report. Also send mail to recipient.
 
 ## Sample Test Report
 
