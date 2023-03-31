@@ -12,7 +12,7 @@ configuration_data = read_configuration_data_from_excel(excel_path)
 
 report_file_name_prefix = f"{read_date()}_{read_time()}"
 test_type = configuration_data['test_type']
-run_command = f"cd ../.. && python -m pytest -m {test_type} --html=./Reports/HTMLReports/{test_type}_report_html/{test_type}_{report_file_name_prefix}_report.html " \
+run_command = f"cd ../.. && python -m pytest -m {test_type} -v -s -p no:warnings --html=./Reports/HTMLReports/{test_type}_report_html/{test_type}_{report_file_name_prefix}_report.html " \
               f"--self-contained-html " \
               f"-v --junitxml=./Reports/XMLReports/{test_type}_{report_file_name_prefix}_report.xml" \
               f"-s --alluredir=./Reports/AllureReports/{test_type}_report_allure/{report_file_name_prefix}"
