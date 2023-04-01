@@ -74,9 +74,9 @@ python -m pytest -m <smoke/regression> --html=Reports/HTMLReports/index.html --s
 ```
 allure serve ./Reports/AllureReports/<smoke/regression>_report_allure
 ```
-* To run all test cases without cmd line, Go to below directory, run `TestRunner.py` file by right click from pycharm
+* To run all test cases without cmd line, Go to project root directory & run `TestRunner.py` file by double click.
 ```
-Test > TestSuite > TestRunner.py
+TestRunner.py
 ```
 This will create an HTML, allure report. You can find report in Reports directory, report automatically will open in browser.
 * You can configure Jenkins to parameterized run your test cases & generate html report, allure report, junit report. Also send mail to recipient.
