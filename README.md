@@ -62,11 +62,10 @@ This is an selenium based framework that interacts with Ferdia Sharebus Web App 
     ```
     python -m pytest -v -s
     ```
-   This will open an app in the android device & login into Daraz.
 
 ## Run Automated Tests
 
-* To run all test cases with cmd line with html & allure report, run
+* To run all test cases in cmd line with html & allure report, run
 ```
 python -m pytest -m <smoke/regression> --html=Reports/HTMLReports/index.html --self-contained-html -s --alluredir=./Reports/AllureReports/<smoke/regression>_report_allure
 ```
