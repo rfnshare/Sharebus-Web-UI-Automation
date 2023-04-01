@@ -46,19 +46,19 @@ This is an selenium based framework that interacts with Ferdia Sharebus Web App 
     ```
     Test/TestData/test_data.xlsx
     ```
-   Make sure you connect you android device/emulator & set uid in TestCase/base_test.py.
+   
 4. Go to the project's root directory and install requirements(Recommended create virtual env first).
     ```
     pip install -r requirements.txt
     ```
    
-5. For Smoke set, Run this script.
+5. For Smoke set without report, Run this script.
     ```
     python -m pytest -m smoke
     ```
    This will open a web app in the chosen browser & run smoke set.
 
-6. For Full Run this script from cmd line.
+6. For Full Run this script from cmd line without report.
     ```
     python -m pytest -v -s
     ```
