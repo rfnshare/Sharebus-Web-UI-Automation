@@ -7,9 +7,13 @@ import logging.config
 @pytest.mark.usefixtures("setup")
 class WebDriverSetup:
     def get_logger(self):
-        file = logging.FileHandler(Path(__file__).parent.parent.parent / "Reports/Logs/logfile.log")  # File for log
-        formatter = logging.Formatter("%(levelname)s :%(name)s :%(message)s :%(asctime)s",
-                                      datefmt='%Y-%m-%d %I:%M:%S %p')  # Format of log
+        file = logging.FileHandler(
+            Path(__file__).parent.parent.parent / "Reports/Logs/logfile.log"
+        )  # File for log
+        formatter = logging.Formatter(
+            "%(levelname)s :%(name)s :%(message)s :%(asctime)s",
+            datefmt="%Y-%m-%d %I:%M:%S %p",
+        )  # Format of log
         file.setFormatter(formatter)  # set formatter into file
 
         logger_name = inspect.stack()[1][3]

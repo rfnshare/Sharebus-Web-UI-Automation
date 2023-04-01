@@ -15,7 +15,9 @@ class Browser:
     web_driver = webdriver
     application_settings = ApplicationSettings()
 
-    configuration_data = read_configuration_data_from_excel(application_settings.get_test_data_file_path(), sheet_name="configuration")
+    configuration_data = read_configuration_data_from_excel(
+        application_settings.get_test_data_file_path(), sheet_name="configuration"
+    )
     headless = "headless" if configuration_data["headless"] == "yes" else "headful"
 
     options = Options()
@@ -36,8 +38,7 @@ class Browser:
     options.add_argument("--allow-insecure-localhost")
     options.add_argument("--window-size=1280,800")
 
-    options.experimental_options["prefs"] = {
-        "logging.browser.enable": "false"}
+    options.experimental_options["prefs"] = {"logging.browser.enable": "false"}
 
     def launch_browser(self):
         """
@@ -46,18 +47,22 @@ class Browser:
         """
         self.application_settings.setUp()
         browser_name = self.application_settings.get_browser_name()
-        if browser_name == 'chrome':
-            self.web_driver = webdriver.Chrome(ChromeDriverManager().install(), options=self.options)
-        elif browser_name == 'firefox':
+        if browser_name == "chrome":
+            self.web_driver = webdriver.Chrome(
+                ChromeDriverManager().install(), options=self.options
+            )
+        elif browser_name == "firefox":
             self.web_driver = webdriver.Firefox(GeckoDriverManager().install())
-        elif browser_name == 'ie':
+        elif browser_name == "ie":
             self.web_driver = webdriver.Ie(IEDriverManager().install())
-        elif browser_name == 'edge':
+        elif browser_name == "edge":
             self.web_driver = webdriver.Edge(
-                executable_path=EdgeChromiumDriverManager().install())
-        elif browser_name == 'opera':
+                executable_path=EdgeChromiumDriverManager().install()
+            )
+        elif browser_name == "opera":
             self.web_driver = webdriver.Opera(
-                executable_path=OperaDriverManager().install(), )
+                executable_path=OperaDriverManager().install(),
+            )
 
     def get_wait(self):
         return WebDriverWait(self.web_driver, 30)
@@ -83,4 +88,3 @@ class Browser:
     def accept_alert(self):
         self.web_driver.switch_to.alert.accept()
         self.web_driver.switch_to.default_content()
-

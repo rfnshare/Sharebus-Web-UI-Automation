@@ -3,7 +3,6 @@ from Src.PageObject.Locators import MyBusesLocators
 
 
 class MyBusesPage(BasePage):
-
     def __init__(self, driver):
         super().__init__(driver)
         self.driver = driver
@@ -11,4 +10,3 @@ class MyBusesPage(BasePage):
 
     def test(self):
         pass
-

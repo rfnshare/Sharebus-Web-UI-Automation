@@ -11,26 +11,28 @@ class ApplicationSettings:
     """
     This class is used to store the application settings.
     """
+
     file_ext = ".exe"
     browser_name = "chrome"
     image_folder_path = None
     start_time = datetime.datetime.now()
-    excel_path = Path(__file__).resolve().parent.parent / 'Test/TestData/test_data.xlsx'
+    excel_path = Path(__file__).resolve().parent.parent / "Test/TestData/test_data.xlsx"
     # Environment details
-    url = ''
+    url = ""
     test_data_file_path = excel_path
 
     def setUp(self, os="win"):
-
-        data = read_configuration_data_from_excel(ApplicationSettings.test_data_file_path, sheet_name="configuration")
+        data = read_configuration_data_from_excel(
+            ApplicationSettings.test_data_file_path, sheet_name="configuration"
+        )
 
         if os is not None and os.lower() == "win":
             self.file_ext = ".exe"
         else:
             self.file_ext = ""
 
-        self.browser_name = data['browser']
-        self.url = data['frontend_url']
+        self.browser_name = data["browser"]
+        self.url = data["frontend_url"]
 
     def get_test_data_from_excel(self, sheet_name, table_name):
         """
@@ -39,7 +41,9 @@ class ApplicationSettings:
         :param table_name:
         :return:
         """
-        return read_data_from_excel_by_row(self.test_data_file_path, sheet_name, table_name)
+        return read_data_from_excel_by_row(
+            self.test_data_file_path, sheet_name, table_name
+        )
 
     def set_browser_name(self, browser_name):
         self.browser_name = browser_name

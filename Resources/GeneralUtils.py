@@ -5,21 +5,21 @@ from datetime import datetime
 
 # Read current date
 def read_date():
-    return str(datetime.today().strftime('%Y-%m-%d'))
+    return str(datetime.today().strftime("%Y-%m-%d"))
 
 
 # function to read current date and time
 def read_datetime():
-    return str(datetime.today().strftime('%Y-%m-%d-%H-%M-%S'))
+    return str(datetime.today().strftime("%Y-%m-%d-%H-%M-%S"))
 
 
 # function to read raw time
 def get_raw_time():
-    return str(datetime.today().strftime('%Y%d%H%M%S'))
+    return str(datetime.today().strftime("%Y%d%H%M%S"))
 
 
 def read_time():
-    return str(datetime.today().strftime('%I-%M-%S-%p'))
+    return str(datetime.today().strftime("%I-%M-%S-%p"))
 
 
 def take_standard_screenshot(driver, file_name):
@@ -30,7 +30,11 @@ def get_html_reports(report_type):
     reports = []
     if not report_type == "both":
         try:
-            report = os.path.abspath(glob.glob(f"../Reports/HTMLReports/{report_type}_report_html/{report_type}_*.html")[-1])
+            report = os.path.abspath(
+                glob.glob(
+                    f"../Reports/HTMLReports/{report_type}_report_html/{report_type}_*.html"
+                )[-1]
+            )
             reports.append(report)
         except Exception as e:
             print("Report not ready, Error", e)

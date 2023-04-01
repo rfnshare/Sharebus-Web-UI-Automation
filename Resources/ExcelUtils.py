@@ -6,6 +6,7 @@ def read_configuration_data_from_excel(file, sheet_name="configuration"):
     df = pd.read_excel(file, sheet_name)
     return df.to_dict(orient="records")[0]
 
+
 def read_test_data_from_excel(file, sheet_name, table_name):
     df = pd.read_excel(file, sheet_name, table_name)
     print(df.to_dict(orient="records")[0])

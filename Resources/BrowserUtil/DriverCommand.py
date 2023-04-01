@@ -5,6 +5,7 @@ class DriverCommand:
     """
     This class is used to execute the driver commands.
     """
+
     webdriver = Browser().get_web_driver()
 
     def implicitly_wait(self, time):

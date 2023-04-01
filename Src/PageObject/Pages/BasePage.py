@@ -1,7 +1,13 @@
 import os
 from datetime import time
-from selenium.common import WebDriverException, NoSuchElementException, TimeoutException, \
-    StaleElementReferenceException, ElementNotVisibleException, ElementNotSelectableException
+from selenium.common import (
+    WebDriverException,
+    NoSuchElementException,
+    TimeoutException,
+    StaleElementReferenceException,
+    ElementNotVisibleException,
+    ElementNotSelectableException,
+)
 from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
@@ -14,9 +20,9 @@ class BasePage(object):
         self.driver = driver
         self.timeout = 30
 
-    '''
+    """
        Basic Actions
-    '''
+    """
 
     def find_element(self, *locator):
         return self.driver.find_element(*locator)
@@ -46,7 +52,7 @@ class BasePage(object):
     # Clear input field
     def clear_input_field(self, *locator):
         element = self.find_element(*locator)
-        element.send_keys(Keys.CONTROL + 'a')
+        element.send_keys(Keys.CONTROL + "a")
         element.send_keys(Keys.DELETE)
 
     # Clear input field and then send data to input field
@@ -74,9 +80,9 @@ class BasePage(object):
         rightclick = ActionChains(self.driver).move_to_element(element)
         rightclick.context_click().perform()
 
-    '''
+    """
         iFrame Actions
-    '''
+    """
 
     def change_frame(self, locator):
         self.driver.switch_to.frame(locator)
@@ -85,9 +91,9 @@ class BasePage(object):
     def change_to_default_frame(self):
         self.driver.switch_to.default_content()
 
-    '''
+    """
         Basic Validations
-    '''
+    """
 
     # Element is displayed or not
     def element_is_displayed(self, *locator):
@@ -105,9 +111,9 @@ class BasePage(object):
             res = False
         return res
 
-    '''
+    """
         Waiting Actions
-    '''
+    """
 
     #  wait till presence of element is located
     def wait_till_presence_of_element_located(self, seconds, *locator):
@@ -118,8 +124,13 @@ class BasePage(object):
     #  wait till visibility_of_element_located
     def wait_till_visibility_of_element_located(self, seconds, *locator):
         try:
-            ignored_exceptions = (NoSuchElementException, StaleElementReferenceException)
-            wait = WebDriverWait(self.driver, seconds, ignored_exceptions=ignored_exceptions)
+            ignored_exceptions = (
+                NoSuchElementException,
+                StaleElementReferenceException,
+            )
+            wait = WebDriverWait(
+                self.driver, seconds, ignored_exceptions=ignored_exceptions
+            )
             element = wait.until(EC.visibility_of_element_located(locator))
             return element
         except TimeoutException:
@@ -140,15 +151,15 @@ class BasePage(object):
     def implicit_waits(self, seconds):
         return self.driver.implicitly_wait(seconds)
 
-    '''
+    """
        ActionChains Text Field Actions
-    '''
+    """
 
     # select all the word from text content
     def select_all(self, *locator):
         try:
             action = ActionChains(self.driver)
-            action.key_down(Keys.CONTROL).send_keys('A').perform()
+            action.key_down(Keys.CONTROL).send_keys("A").perform()
         except Exception as e:
             print(e)
             self.driver.find_element(*locator).send_keys(Keys.CONTROL, "a")
@@ -161,7 +172,7 @@ class BasePage(object):
 
     def save_shortcut(self):
         action = ActionChains(self.driver)
-        action.key_down(Keys.CONTROL).send_keys('S').perform()
+        action.key_down(Keys.CONTROL).send_keys("S").perform()
 
     def press_space_bar(self, *locator):
         self.driver.find_element(*locator).send_keys(Keys.SPACE)
@@ -184,7 +195,9 @@ class BasePage(object):
 
     def go_to_right_using_right_arrow_key(self, times, *locator):
         for i in range(times):
-            self.driver.find_element(*locator).send_keys(Keys.CONTROL + Keys.ARROW_RIGHT)
+            self.driver.find_element(*locator).send_keys(
+                Keys.CONTROL + Keys.ARROW_RIGHT
+            )
 
     def go_to_up_using_up_arrow_key(self, times, *locator):
         for i in range(times):
@@ -194,7 +207,7 @@ class BasePage(object):
         for i in range(times):
             self.driver.find_element(*locator).send_keys(Keys.CONTROL + Keys.ARROW_DOWN)
 
-    def type_text(self, element, text=''):
+    def type_text(self, element, text=""):
         """
         :param element: WebElement to type text
         :param element:
@@ -202,7 +215,11 @@ class BasePage(object):
         :return:
         """
         try:
-            assert True if self.scroll_to_web_element_with_javascript(element) else "Unable to scroll to element"
+            assert (
+                True
+                if self.scroll_to_web_element_with_javascript(element)
+                else "Unable to scroll to element"
+            )
             self.get_wait(2).until(EC.visibility_of(self.find_element(*element)))
             el = self.driver.find_element(*element)
             el.send_keys(Keys.CONTROL + "a")
@@ -214,9 +231,9 @@ class BasePage(object):
             print("Element not found, ", e)
             return False
 
-    '''
+    """
        Get Text, Values Actions
-    '''
+    """
 
     # Get attribute
     def get_attribute_value(self, attribute, *locator):
@@ -262,9 +279,9 @@ class BasePage(object):
             val.append(element.text)
         return val
 
-    '''
+    """
        ActionChains Drag&Drop Actions
-    '''
+    """
 
     # drag and drop functions
     def drag_and_drop(self, source_locator, target_locator):
@@ -276,24 +293,28 @@ class BasePage(object):
 
     def drag_and_drop_offset(self, xoffset, yoffset, *source_locator):
         source = self.driver.find_element(*source_locator)
-        drag_and_drop = ActionChains(self.driver).drag_and_drop_by_offset(source, xoffset, yoffset)
+        drag_and_drop = ActionChains(self.driver).drag_and_drop_by_offset(
+            source, xoffset, yoffset
+        )
         drag_and_drop.perform()
 
     def drag_and_drop_web_element_with_javascript(self):
         try:
-            self.driver.execute_script("""
+            self.driver.execute_script(
+                """
             var el = document.getElementById(`${draggable_element_id}`);
             var dt = document.getElementById(`${drop_target_element_id}`);
             dt.appendChild(el);
-            """)
+            """
+            )
             return True
         except Exception as e:
             print("Element not found, ", e)
             return False
 
-    '''
+    """
     ActionChains Dropdown Actions
-    '''
+    """
 
     # Get num of dropdown element
     def get_num_of_dropdown_element(self, *locator):
@@ -318,7 +339,7 @@ class BasePage(object):
 
     def get_active_option_value_of_dropdown_element(self, *locator):
         select = Select(self.driver.find_element(*locator))
-        selected_option_value = select.first_selected_option.get_attribute('value')
+        selected_option_value = select.first_selected_option.get_attribute("value")
         return selected_option_value
 
     def select_dropdown_element(self, name, *locator):
@@ -351,9 +372,9 @@ class BasePage(object):
         options = select.options
         return options
 
-    '''
+    """
          Window Handle Actions
-    '''
+    """
 
     # Open new tab
     def open_new_tab(self):
@@ -372,7 +393,7 @@ class BasePage(object):
 
     # Switch tab
     def switch_tab(self):
-        self.driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.TAB)
+        self.driver.find_element_by_tag_name("body").send_keys(Keys.CONTROL + Keys.TAB)
 
     # Switch to window by window(e.g. CDwindow-BD9C79EE569362CD463868B54C725BEF [get by current window handle] )
     def switch_to_window_by_window(self, window):
@@ -425,9 +446,9 @@ class BasePage(object):
             print("Element not found, ", e)
             return False
 
-    '''
+    """
         ActionChains Advanced Actions
-    '''
+    """
 
     def move_cursor_to_element(self, *locator):
         element = self.driver.find_element(*locator)
@@ -440,18 +461,25 @@ class BasePage(object):
         actions.move_to_element(element)
         actions.perform()
 
-    '''
+    """
         Common Actions
-    '''
+    """
 
     # Refresh page
     def refresh(self):
         return self.driver.refresh()
 
     def get_wait(self, wait=10):
-        return WebDriverWait(self.driver, wait, poll_frequency=1,
-                             ignored_exceptions=[ElementNotVisibleException, ElementNotSelectableException,
-                                                 StaleElementReferenceException])
+        return WebDriverWait(
+            self.driver,
+            wait,
+            poll_frequency=1,
+            ignored_exceptions=[
+                ElementNotVisibleException,
+                ElementNotSelectableException,
+                StaleElementReferenceException,
+            ],
+        )
 
     def scroll_down(self):
         self.driver.execute_script("window.scrollTo(0,document.body.scrollHeight)")
@@ -468,7 +496,7 @@ class BasePage(object):
             return False
 
     def open_new_tab_on_browser(self, url):
-        self.driver.execute_script(f'''window.open("{url}", "_blank");''')
+        self.driver.execute_script(f"""window.open("{url}", "_blank");""")
 
     def accept_browser_alert(self):
         try:
@@ -531,9 +559,9 @@ class BasePage(object):
         except Exception as e:
             print(e)
 
-    '''
+    """
         Validation Actions
-    '''
+    """
 
     def assert_element_is_displayed(self, message="element is found", *locator):
         res = self.element_is_displayed(*locator)
@@ -548,7 +576,11 @@ class BasePage(object):
             element = self.driver.find_element(*locator)
             res = element.is_displayed()
             # print('>>>', res)
-        except (TimeoutException, NoSuchElementException, StaleElementReferenceException) as e:
+        except (
+            TimeoutException,
+            NoSuchElementException,
+            StaleElementReferenceException,
+        ) as e:
             # except WebDriverException:
             #     print(WebDriverException)
             # print(e)
@@ -570,7 +602,7 @@ class BasePage(object):
     def assert_css_property_value(self, choice, attribute, expected_val, *locator):
         val = self.get_css_property(attribute, *locator)
         # print(val)
-        if val.startswith('rgba'):
+        if val.startswith("rgba"):
             val = self.rgba_to_hex(val)
             # print(val)
         if choice is True:
@@ -578,14 +610,16 @@ class BasePage(object):
         else:
             assert val != expected_val
 
-    def assert_css_property_value_web_element(self, choice, attribute, expected_val, element):
+    def assert_css_property_value_web_element(
+        self, choice, attribute, expected_val, element
+    ):
         val = element.value_of_css_property(attribute)
         # print(val)
         # print(val)
-        if val.startswith('rgba'):
+        if val.startswith("rgba"):
             val = self.rgba_to_hex(val)
             # print(val)
-        if val.startswith('rgb'):
+        if val.startswith("rgb"):
             val = self.rgb_to_hex(val)
             # print(val)
         if choice is True:
@@ -601,27 +635,33 @@ class BasePage(object):
         else:
             assert val != expected_val
 
-    def assert_element_attribute_value_in(self, choice, attribute, expected_val, *locator):
+    def assert_element_attribute_value_in(
+        self, choice, attribute, expected_val, *locator
+    ):
         val = self.get_attribute_value(attribute, *locator)
         # print(val)
-        if choice == 'In':
+        if choice == "In":
             assert val in expected_val
         else:
             assert val not in expected_val
 
-    def assert_element_attribute_expected_in_value(self, choice, attribute, expected_val, *locator):
+    def assert_element_attribute_expected_in_value(
+        self, choice, attribute, expected_val, *locator
+    ):
         val = self.get_attribute_value(attribute, *locator)
         # print(val, expected_val)
-        if choice == 'In':
+        if choice == "In":
             assert expected_val in val
         else:
             assert expected_val not in val
 
     @staticmethod
-    def assert_element_attribute_expected_in_value_web_element(choice, attribute, expected_val, web_element):
+    def assert_element_attribute_expected_in_value_web_element(
+        choice, attribute, expected_val, web_element
+    ):
         val = web_element.get_attribute(attribute)
         # print(val, expected_val)
-        if choice == 'In':
+        if choice == "In":
             assert expected_val in val
         else:
             assert expected_val not in val
@@ -638,7 +678,7 @@ class BasePage(object):
     def assert_element_text_in(self, choice, expected_val, *locator):
         val = self.get_text(*locator)
         # print(val)
-        if choice == 'In':
+        if choice == "In":
             assert expected_val in val
         else:
             assert expected_val not in val
@@ -672,23 +712,23 @@ class BasePage(object):
         val = self.get_attribute_value(attribute, *locator)
         assert val == result
 
-    '''
+    """
     CSS Related Actions
-    '''
+    """
 
     # CSS related function
     @staticmethod
     def rgba_to_hex(rgba):
-        rgba = eval(rgba.split('a')[-1])
-        return '#{:02x}{:02x}{:02x}'.format(*rgba)
+        rgba = eval(rgba.split("a")[-1])
+        return "#{:02x}{:02x}{:02x}".format(*rgba)
 
     @staticmethod
     def rgb_to_hex(rgb):
-        rgb = eval(rgb.split('b')[-1])
-        return '#{:02x}{:02x}{:02x}'.format(*rgb)
+        rgb = eval(rgb.split("b")[-1])
+        return "#{:02x}{:02x}{:02x}".format(*rgb)
 
     def get_console_log(self):
-        log = self.driver.get_log('browser')
+        log = self.driver.get_log("browser")
         return log
 
     @staticmethod
