@@ -66,7 +66,7 @@ class BasePage(object):
         element.click()
 
     @staticmethod
-    def click_web_element(self, element):
+    def click_web_element(element):
         element.click()
 
     # Mouse hover on an element
@@ -177,10 +177,10 @@ class BasePage(object):
     def press_space_bar(self, *locator):
         self.driver.find_element(*locator).send_keys(Keys.SPACE)
 
-    def press_cntrl_z(self, *locator):
+    def press_ctrl_z(self, *locator):
         self.driver.find_element(*locator).send_keys(Keys.CONTROL + "z")
 
-    def press_cntrl_y(self, *locator):
+    def press_ctrl_y(self, *locator):
         self.driver.find_element(*locator).send_keys(Keys.CONTROL + "y")
 
     def save_shortcut_with_locator(self, *locator):
@@ -732,5 +732,5 @@ class BasePage(object):
         return log
 
     @staticmethod
-    def current_timestamp(self):
+    def current_timestamp():
         return int(time.time())
