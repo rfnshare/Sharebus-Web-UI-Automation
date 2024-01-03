@@ -143,8 +143,9 @@ class BasePage(object):
         # print(element)
         return element
 
-    def wait_for_clickable_an_element(self, element):
+    def wait_for_clickable_an_element(self, locator):
         wait = WebDriverWait(self.driver, 10)
+        element = self.find_element(*locator)
         wait.until(EC.element_to_be_clickable(element))
 
     # Implicit wait

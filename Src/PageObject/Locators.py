@@ -7,4 +7,5 @@ class HomePageLocators:
 
 
 class MyBusesLocators:
-    pass
+    SIGN_IN_BUTTON = (By.XPATH, "//button[text()='Sign in ']")
+    NAVBAR = (By.XPATH, "//h1")
