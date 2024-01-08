@@ -1,5 +1,9 @@
 from selenium import webdriver
 import allure
+from selenium.webdriver.chrome.service import Service as Chrome_Service
+from selenium.webdriver.edge.service import Service as Edge_Service
+from selenium.webdriver.firefox.service import Service as Firefox_Service
+from selenium.webdriver.ie.service import Service as IE_Service
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from webdriver_manager.microsoft import IEDriverManager
@@ -48,17 +52,27 @@ class Browser:
         self.application_settings.setUp()
         browser_name = self.application_settings.get_browser_name()
         if browser_name == "chrome":
-            self.web_driver = webdriver.Chrome(
-                ChromeDriverManager().install(), options=self.options
-            )
+            chrome_service = Chrome_Service()
+            self.web_driver = webdriver.Chrome(service=chrome_service, options=self.options
+                                               )
+            # self.web_driver = webdriver.Chrome(
+            #     ChromeDriverManager().install(), options=self.options
+            # ) Old Method
         elif browser_name == "firefox":
-            self.web_driver = webdriver.Firefox(GeckoDriverManager().install())
+            firefox_service = Firefox_Service()
+            self.web_driver = webdriver.Firefox(service=firefox_service)
+            # self.web_driver = webdriver.Firefox(GeckoDriverManager().install()) old method
         elif browser_name == "ie":
-            self.web_driver = webdriver.Ie(IEDriverManager().install())
+            ie_service = IE_Service()
+            self.web_driver = webdriver.Ie(service=ie_service)
+            # self.web_driver = webdriver.Ie(IEDriverManager().install()) old method
         elif browser_name == "edge":
-            self.web_driver = webdriver.Edge(
-                executable_path=EdgeChromiumDriverManager().install()
-            )
+            edge_service = Edge_Service()
+            self.web_driver = webdriver.Edge(service=edge_service)
+            # self.web_driver = webdriver.Edge(
+            #                 executable_path=EdgeChromiumDriverManager().install()
+            #             ) old method
+
         elif browser_name == "opera":
             self.web_driver = webdriver.Opera(
                 executable_path=OperaDriverManager().install(),
