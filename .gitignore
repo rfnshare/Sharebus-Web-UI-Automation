@@ -16,3 +16,4 @@ Resources/BrowserUtil/__pycache__/
 Src/PageObject/Pages/__pycache__/
 Src/PageObject/__pycache__/
 Src/TestBase/__pycache__/
+test.py
